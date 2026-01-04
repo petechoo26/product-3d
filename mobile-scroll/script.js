@@ -1,4 +1,3 @@
-// ✅ P01 ~ P04 총 4장
 const frames = [
   "./images/P01.png",
   "./images/P02.png",
@@ -6,7 +5,7 @@ const frames = [
   "./images/P04.png",
 ];
 
-const screen = document.getElementById("screen");
+const img = document.getElementById("phone");
 const space = document.getElementById("scrollSpace");
 
 // preload
@@ -16,10 +15,10 @@ frames.forEach(src => {
 });
 
 let last = -1;
-
-function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
+const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
 function update() {
+  // ✅ 문서 전체(scrollHeight) 쓰지 말고, scroll-space 기준으로 진행률 계산
   const rect = space.getBoundingClientRect();
   const total = space.offsetHeight - window.innerHeight;
 
@@ -30,8 +29,8 @@ function update() {
 
   if (idx !== last) {
     last = idx;
-    // 캐시 방지용 쿼리 (가끔 Pages가 안 바뀐 것처럼 보이는 문제 방지)
-    screen.src = `${frames[idx]}?f=${idx}`;
+    // ✅ 캐시 때문에 “안 바뀐 것처럼 보이는” 문제 방지
+    img.src = `${frames[idx]}?f=${idx}`;
   }
 }
 
