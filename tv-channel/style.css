@@ -14,38 +14,43 @@ html, body{
 }
 
 body{
-  background:var(--bg);
   overflow-x:hidden;
+  background:var(--bg);
 }
 
-/* ✅ 스크롤 높이를 확실히 만들기 */
+/* 스크롤 영역 (실제 스크롤은 여기서 생김) */
 .scroll{
   background:var(--bg);
 }
 
-/* 섹션 1개 = 1채널, 각 100vh */
 .trigger{
-  height:100vh;
+  height:100vh; /* 섹션 1개 = 채널 1개 */
 }
 
-/* ✅ TV는 스크롤 위에 “붙어있는” 레이어 */
+/* 화면에 고정되는 레이어 */
 .stage{
-  position: fixed;     /* sticky 대신 fixed가 더 안정적 */
-  inset: 0;            /* top:0; right:0; bottom:0; left:0 */
-  background: var(--bg);
+  position:fixed;
+  inset:0;
+  background:var(--bg);
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  pointer-events:none; /* 스크롤/터치 방해 X */
-  z-index: 10;
+  pointer-events:none;
+  z-index:10;
 }
 
-/* ✅ 완성 컷(=TV 포함 전체 PNG) */
-.tv{
+/* TV + 노이즈 겹치는 래퍼 */
+.stack{
+  position:relative;
   width:var(--tv-width);
   max-height:88vh;
+}
+
+/* TV 완성 컷 */
+.tv{
+  width:100%;
   height:auto;
   display:block;
 
@@ -54,4 +59,20 @@ body{
   transition:opacity var(--fade-ms) ease;
 }
 
-img{ display:block; }
+/* 노이즈 오버레이 */
+.noise{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+
+  pointer-events:none;
+  mix-blend-mode:screen;
+  opacity:0; /* 기본은 숨김 */
+}
+
+/* 이미지 기본 여백 제거 */
+img{
+  display:block;
+}
