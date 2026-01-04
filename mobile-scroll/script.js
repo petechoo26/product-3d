@@ -1,3 +1,4 @@
+// ✅ P01 ~ P04 총 4장
 const frames = [
   "./images/P01.png",
   "./images/P02.png",
@@ -5,7 +6,7 @@ const frames = [
   "./images/P04.png",
 ];
 
-const img = document.getElementById("phone");
+const screen = document.getElementById("screen");
 const space = document.getElementById("scrollSpace");
 
 // preload
@@ -16,9 +17,7 @@ frames.forEach(src => {
 
 let last = -1;
 
-function clamp(n, a, b) {
-  return Math.max(a, Math.min(b, n));
-}
+function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
 
 function update() {
   const rect = space.getBoundingClientRect();
@@ -31,7 +30,8 @@ function update() {
 
   if (idx !== last) {
     last = idx;
-    img.src = `${frames[idx]}?f=${idx}`; // 캐시 방지
+    // 캐시 방지용 쿼리 (가끔 Pages가 안 바뀐 것처럼 보이는 문제 방지)
+    screen.src = `${frames[idx]}?f=${idx}`;
   }
 }
 
