@@ -1,1 +1,101 @@
+:root{
+  --bg:#0b0b0b;
+  --text:#d9d9d9;
 
+  /* ✅ 여기만 나중에 맞추면 됨 (임시값) */
+  --screen-top: 14%;
+  --screen-left: 16%;
+  --screen-width: 68%;
+  --screen-height: 54%;
+  --screen-radius: 18px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+}
+
+/* TV 고정 영역 */
+.stage{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none; /* 스크롤 방해 X */
+}
+
+.tv{
+  position:relative;
+  width:min(900px, 92vw);
+  aspect-ratio: 4 / 3; /* TV 전체 비율(대충) */
+}
+
+/* 화면(채널) */
+.screen{
+  position:absolute;
+  top:var(--screen-top);
+  left:var(--screen-left);
+  width:var(--screen-width);
+  height:var(--screen-height);
+  object-fit:cover;
+  border-radius:var(--screen-radius);
+  z-index:1;
+
+  /* 전환 연출 */
+  opacity:1;
+  transition: opacity 140ms ease;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+/* 노이즈 레이어(전환 순간만 켜짐) */
+.noise{
+  position:absolute;
+  top:var(--screen-top);
+  left:var(--screen-left);
+  width:var(--screen-width);
+  height:var(--screen-height);
+  object-fit:cover;
+  border-radius:var(--screen-radius);
+  z-index:2;
+
+  opacity:0;
+  mix-blend-mode: screen;
+  pointer-events:none;
+}
+
+/* TV 프레임 */
+.frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  z-index:3;
+}
+
+/* 스크롤 섹션 */
+.scroll{
+  position:relative;
+  pointer-events:auto;
+}
+
+.trigger{
+  min-height: 100vh;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding: 8vh 6vw;
+}
+
+.copy{
+  opacity:.35;
+  letter-spacing:.12em;
+  font-size: 12px;
+  text-transform: uppercase;
+}
