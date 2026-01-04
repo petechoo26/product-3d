@@ -1,7 +1,7 @@
 :root{
   --bg:#000;
   --tv-width:min(980px, 92vw);
-  --fade-ms:110ms; /* 컷컷 느낌 */
+  --fade-ms:110ms;
 }
 
 *{ box-sizing:border-box; }
@@ -14,24 +14,35 @@ html, body{
 }
 
 body{
+  background:var(--bg);
   overflow-x:hidden;
 }
 
-/* TV를 화면 중앙에 고정 */
-.stage{
-  position:sticky;
-  top:0;
-  height:100vh;
-  width:100%;
+/* ✅ 스크롤 높이를 확실히 만들기 */
+.scroll{
   background:var(--bg);
+}
+
+/* 섹션 1개 = 1채널, 각 100vh */
+.trigger{
+  height:100vh;
+}
+
+/* ✅ TV는 스크롤 위에 “붙어있는” 레이어 */
+.stage{
+  position: fixed;     /* sticky 대신 fixed가 더 안정적 */
+  inset: 0;            /* top:0; right:0; bottom:0; left:0 */
+  background: var(--bg);
 
   display:flex;
   align-items:center;
   justify-content:center;
-  pointer-events:none;
+
+  pointer-events:none; /* 스크롤/터치 방해 X */
+  z-index: 10;
 }
 
-/* 완성 컷(=TV 포함 전체 PNG) */
+/* ✅ 완성 컷(=TV 포함 전체 PNG) */
 .tv{
   width:var(--tv-width);
   max-height:88vh;
@@ -43,15 +54,4 @@ body{
   transition:opacity var(--fade-ms) ease;
 }
 
-/* 스크롤 길이 생성 */
-.scroll{
-  background:var(--bg);
-}
-
-/* 섹션 1개 = 채널 1개 */
-.trigger{
-  min-height:100vh;
-}
-
-/* 이미지 기본 여백 방지 */
 img{ display:block; }
