@@ -6,18 +6,20 @@ html,body{
   overflow-x:hidden;
 }
 
+/* 반영 체크 */
 .ver{
   position:fixed;
-  top:10px;
-  left:10px;
+  left:12px;
+  top:12px;
   z-index:9999;
-  font: 12px/1.2 system-ui, sans-serif;
-  opacity:.6;
+  font:12px/1.2 system-ui, sans-serif;
+  opacity:.65;
   pointer-events:none;
 }
 
+/* 스크롤 공간 */
 .scroll-space{
-  height: 420vh; /* 4장이라 420vh 정도면 충분 */
+  height:420vh; /* 4장 전환엔 이 정도면 충분 */
 }
 
 .viewer{
