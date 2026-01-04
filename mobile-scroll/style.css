@@ -1,28 +1,26 @@
-* { margin:0; padding:0; box-sizing:border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
-  height:100%;
-  background: transparent;
+  height: 100%;
+  background: transparent;   /* 아임웹 배경 그대로 */
+  overflow-x: hidden;
 }
 
-/* 스크롤은 이 영역이 만든다 */
-.scroll-space{
-  height: 500vh;
+.scroll-space {
+  height: 500vh;            /* 스크롤 전환용 */
 }
 
-/* 중앙 고정 */
-.viewer{
+.viewer {
   position: fixed;
   inset: 0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
-/* 핸드폰 이미지 */
-#phone{
-  width: min(96vw, 520px);   /* 최대한 크게 */
+#phone {
+  width: min(96vw, 620px);  /* 최대한 크게 */
   height: auto;
-  display:block;
+  display: block;
 }
