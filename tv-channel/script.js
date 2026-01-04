@@ -11,19 +11,23 @@ const tv = document.getElementById("tv");
 const noise = document.getElementById("noise");
 
 let current = 0;
-const INTERVAL = 1800; // 1.8초
+let switching = false;
+
+/* 노이즈는 화면만 살짝 */
+const USE_NOISE = true;
 
 function flashNoise(){
-  if(!noise) return;
+  if(!USE_NOISE || !noise) return;
   noise.style.opacity = "0.18";
-  setTimeout(() => {
-    noise.style.opacity = "0";
-  }, 100);
+  setTimeout(() => (noise.style.opacity = "0"), 100);
 }
 
-function nextChannel(){
-  const next = (current + 1) % channels.length;
+function setChannel(next){
+  next = Number(next);
+  if (switching || next === current) return;
+  if (next < 0 || next >= channels.length) return;
 
+  switching = true;
   tv.style.opacity = "0";
   flashNoise();
 
@@ -33,9 +37,20 @@ function nextChannel(){
     requestAnimationFrame(() => {
       tv.style.opacity = "1";
       current = next;
+      switching = false;
     });
   };
   img.src = channels[next];
 }
 
-setInterval(nextChannel, INTERVAL);
+/* ✅ 바깥(아임웹)에서 스크롤 진행률 받기 */
+window.addEventListener("message", (e) => {
+  const data = e.data;
+  if (!data || data.type !== "DEOCULTO_SCROLL") return;
+
+  // progress: 0~1
+  const p = Math.min(1, Math.max(0, Number(data.progress || 0)));
+  const idx = Math.min(channels.length - 1, Math.floor(p * channels.length));
+
+  setChannel(idx);
+});
