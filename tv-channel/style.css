@@ -1,17 +1,7 @@
 :root{
-  /* 배경은 무조건 블랙 (흰 박스 방지) */
   --bg:#000;
-  --text:#d9d9d9;
-
-  /* ✅ CRT Screen 좌표 (tv-frame.png 기준 확정값) */
-  --screen-top: 16.4%;
-  --screen-left: 19.2%;
-  --screen-width: 61.6%;
-  --screen-height: 44.1%;
-  --screen-radius: 22px;
-
-  /* TV 전체 크기 */
-  --tv-width: min(920px, 92vw);
+  --tv-width:min(980px, 92vw);
+  --fade-ms:110ms; /* 컷컷 느낌 */
 }
 
 *{ box-sizing:border-box; }
@@ -20,101 +10,48 @@ html, body{
   height:100%;
   margin:0;
   padding:0;
-  background: var(--bg);
+  background:var(--bg);
 }
 
 body{
-  background: var(--bg);
-  color: var(--text);
   overflow-x:hidden;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
 }
 
-/* ✅ TV를 뷰포트에 고정하는 스테이지 (흰 배경 절대 금지) */
+/* TV를 화면 중앙에 고정 */
 .stage{
-  position: sticky;
+  position:sticky;
   top:0;
   height:100vh;
-  background: var(--bg);
+  width:100%;
+  background:var(--bg);
+
   display:flex;
   align-items:center;
   justify-content:center;
-  pointer-events:none; /* 스크롤 방해 X */
+  pointer-events:none;
 }
 
-/* TV 컨테이너 */
+/* 완성 컷(=TV 포함 전체 PNG) */
 .tv{
-  position:relative;
-  width: var(--tv-width);
-  /* tv-frame.png가 정사각이라 aspect-ratio를 1로 둬야 찌그러짐 없음 */
-  aspect-ratio: 1 / 1;
-}
-
-/* ✅ 채널 화면 */
-.screen{
-  position:absolute;
-  top: var(--screen-top);
-  left: var(--screen-left);
-  width: var(--screen-width);
-  height: var(--screen-height);
-  object-fit: cover;
-  border-radius: var(--screen-radius);
-  z-index: 1;
-
-  opacity: 1;
-  transition: opacity 140ms ease;
-  filter: saturate(1.05) contrast(1.05);
-}
-
-/* 노이즈 레이어 */
-.noise{
-  position:absolute;
-  top: var(--screen-top);
-  left: var(--screen-left);
-  width: var(--screen-width);
-  height: var(--screen-height);
-  object-fit: cover;
-  border-radius: var(--screen-radius);
-  z-index: 2;
-
-  opacity: 0;
-  mix-blend-mode: screen;
-  pointer-events:none;
-}
-
-/* 프레임(가장 위) */
-.frame{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit: contain;
-  z-index: 3;
-  pointer-events:none;
-}
-
-/* 스크롤 구간: 트리거 섹션으로 채널 바뀜 */
-.scroll{
-  background: var(--bg);
-}
-
-/* 섹션 하나가 1채널 담당 (각 1뷰포트 높이) */
-.trigger{
-  min-height: 100vh;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  padding: 6vh 6vw;
-}
-
-/* 내용 안 넣어도 스크롤 되도록 */
-.spacer{
-  height: 1px;
-  width: 1px;
-  opacity: 0;
-}
-
-/* 혹시 브라우저 기본 여백/선이 들어오면 차단 */
-img{
+  width:var(--tv-width);
+  max-height:88vh;
+  height:auto;
   display:block;
+
+  object-fit:contain;
+  opacity:1;
+  transition:opacity var(--fade-ms) ease;
 }
+
+/* 스크롤 길이 생성 */
+.scroll{
+  background:var(--bg);
+}
+
+/* 섹션 1개 = 채널 1개 */
+.trigger{
+  min-height:100vh;
+}
+
+/* 이미지 기본 여백 방지 */
+img{ display:block; }
