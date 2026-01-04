@@ -1,17 +1,15 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#000;overflow-x:hidden}
-body{overflow-y:auto}
+body{overflow-y:auto} /* 중요 */
 
-/* 좌측 상단 표시 */
 .ver{
   position:fixed;left:12px;top:12px;z-index:9999;
   font:12px/1.2 system-ui,sans-serif;color:#fff;opacity:.7;
   pointer-events:none;
 }
 
-/* 스크롤 길이 */
 .scroll-space{
-  height:420vh; /* 길게/짧게 하고 싶으면 여기만 조절 */
+  height:420vh; /* 스크롤 길이(필요하면 200~800vh로 조절) */
 }
 
 .viewer{
@@ -20,41 +18,8 @@ body{overflow-y:auto}
   pointer-events:none;
 }
 
-/* 폰 전체 크기 */
-.phone-wrap{
-  position:relative;
+#phone{
   width:min(96vw,720px);
-}
-
-/* 두 이미지(베이스/스크린) 겹치기 */
-.phone-wrap img{
-  width:100%;
   height:auto;
   display:block;
-}
-
-/* 베이스(테두리 고정) */
-.base{
-  position:relative;
-  z-index:1;
-}
-
-/* 스크린만 바뀌는 레이어 */
-.screen{
-  position:absolute;
-  inset:0;
-  z-index:2;
-
-  /*
-    ✅ 여기 값이 “스크린 창” 영역이야.
-    지금은 기본값으로 넣어둠.
-    필요하면 top/right/bottom/left 퍼센트만 미세 조절하면 됨.
-  */
-  --top: 10.5%;
-  --right: 7.5%;
-  --bottom: 11.5%;
-  --left: 7.5%;
-  --round: 6.5%;
-
-  clip-path: inset(var(--top) var(--right) var(--bottom) var(--left) round var(--round));
 }
