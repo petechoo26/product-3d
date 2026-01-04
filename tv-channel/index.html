@@ -4,33 +4,32 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Deoculto TV Channel</title>
+
   <link rel="stylesheet" href="./style.css" />
   <script src="./script.js" defer></script>
 </head>
 <body>
 
-  <!-- 화면에 TV를 고정(Sticky)로 띄우는 레이어 -->
+  <!-- TV 고정(Sticky) -->
   <div class="stage">
-    <div class="tv" aria-label="Deoculto TV">
-      <!-- 채널 화면: 이것만 바뀜 -->
-      <img id="screen" class="screen" src="./images/ch-01.jpg" alt="TV channel" />
-
-      <!-- 전환 노이즈(선택) -->
-      <img class="noise" src="./images/noise.png" alt="" aria-hidden="true" />
-
-      <!-- TV 프레임(투명 PNG) -->
-      <img class="frame" src="./images/tv-frame.png" alt="TV frame" />
-    </div>
+    <img
+      id="tv"
+      class="tv"
+      src="./images/ch-01.png"
+      alt="Deoculto TV Channel"
+      loading="eager"
+      decoding="async"
+    />
   </div>
 
-  <!-- 스크롤 트리거(6개) -->
+  <!-- 스크롤 트리거 6개 -->
   <main class="scroll">
-    <section class="trigger" data-channel="0"><div class="spacer"></div></section>
-    <section class="trigger" data-channel="1"><div class="spacer"></div></section>
-    <section class="trigger" data-channel="2"><div class="spacer"></div></section>
-    <section class="trigger" data-channel="3"><div class="spacer"></div></section>
-    <section class="trigger" data-channel="4"><div class="spacer"></div></section>
-    <section class="trigger" data-channel="5"><div class="spacer"></div></section>
+    <section class="trigger" data-channel="0"></section>
+    <section class="trigger" data-channel="1"></section>
+    <section class="trigger" data-channel="2"></section>
+    <section class="trigger" data-channel="3"></section>
+    <section class="trigger" data-channel="4"></section>
+    <section class="trigger" data-channel="5"></section>
   </main>
 
 </body>
