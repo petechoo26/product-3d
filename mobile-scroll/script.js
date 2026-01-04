@@ -1,5 +1,4 @@
 const frames = [
-  "./images/P00.png",
   "./images/P01.png",
   "./images/P02.png",
   "./images/P03.png",
@@ -9,22 +8,22 @@ const frames = [
 const img = document.getElementById("phone");
 const space = document.getElementById("scrollSpace");
 
-// preload (TV에서도 했던 방식)
-for (const src of frames) {
+// preload
+frames.forEach(src => {
   const i = new Image();
   i.src = src;
-}
+});
 
 let last = -1;
 
-function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+function clamp(n, a, b) {
+  return Math.max(a, Math.min(b, n));
+}
 
-function update(){
-  // ✅ 핵심: “문서 전체”가 아니라 scroll-space 기준
+function update() {
   const rect = space.getBoundingClientRect();
-
-  // space의 시작~끝을 0~1로 정규화
   const total = space.offsetHeight - window.innerHeight;
+
   const progressed = clamp(-rect.top, 0, total);
   const t = total > 0 ? progressed / total : 0;
 
@@ -36,6 +35,6 @@ function update(){
   }
 }
 
-window.addEventListener("scroll", update, { passive:true });
+window.addEventListener("scroll", update, { passive: true });
 window.addEventListener("resize", update);
 update();
