@@ -1,1 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deoculto TV Channel</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
 
+  <!-- TV 고정(Sticky) 영역 -->
+  <div class="stage">
+    <div class="tv">
+      <img id="screen" class="screen" src="./images/ch-01.jpg" alt="channel screen" />
+      <img class="noise" src="./images/noise.png" alt="" aria-hidden="true" />
+      <img class="frame" src="./images/tv-frame.png" alt="tv frame" />
+    </div>
+  </div>
+
+  <!-- 스크롤 섹션: 6개 = 6채널 -->
+  <main class="scroll">
+    <section class="trigger" data-channel="0">
+      <div class="copy">
+        <p>CHANNEL 01</p>
+      </div>
+    </section>
+
+    <section class="trigger" data-channel="1">
+      <div class="copy">
+        <p>CHANNEL 02</p>
+      </div>
+    </section>
+
+    <section class="trigger" data-channel="2">
+      <div class="copy">
+        <p>CHANNEL 03</p>
+      </div>
+    </section>
+
+    <section class="trigger" data-channel="3">
+      <div class="copy">
+        <p>CHANNEL 04</p>
+      </div>
+    </section>
+
+    <section class="trigger" data-channel="4">
+      <div class="copy">
+        <p>CHANNEL 05</p>
+      </div>
+    </section>
+
+    <section class="trigger" data-channel="5">
+      <div class="copy">
+        <p>CHANNEL 06</p>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
