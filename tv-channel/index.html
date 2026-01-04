@@ -2,59 +2,35 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Deoculto TV Channel</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./script.js" defer></script>
 </head>
 <body>
 
-  <!-- TV 고정(Sticky) 영역 -->
+  <!-- 화면에 TV를 고정(Sticky)로 띄우는 레이어 -->
   <div class="stage">
-    <div class="tv">
-      <img id="screen" class="screen" src="./images/ch-01.jpg" alt="channel screen" />
+    <div class="tv" aria-label="Deoculto TV">
+      <!-- 채널 화면: 이것만 바뀜 -->
+      <img id="screen" class="screen" src="./images/ch-01.jpg" alt="TV channel" />
+
+      <!-- 전환 노이즈(선택) -->
       <img class="noise" src="./images/noise.png" alt="" aria-hidden="true" />
-      <img class="frame" src="./images/tv-frame.png" alt="tv frame" />
+
+      <!-- TV 프레임(투명 PNG) -->
+      <img class="frame" src="./images/tv-frame.png" alt="TV frame" />
     </div>
   </div>
 
-  <!-- 스크롤 섹션: 6개 = 6채널 -->
+  <!-- 스크롤 트리거(6개) -->
   <main class="scroll">
-    <section class="trigger" data-channel="0">
-      <div class="copy">
-        <p>CHANNEL 01</p>
-      </div>
-    </section>
-
-    <section class="trigger" data-channel="1">
-      <div class="copy">
-        <p>CHANNEL 02</p>
-      </div>
-    </section>
-
-    <section class="trigger" data-channel="2">
-      <div class="copy">
-        <p>CHANNEL 03</p>
-      </div>
-    </section>
-
-    <section class="trigger" data-channel="3">
-      <div class="copy">
-        <p>CHANNEL 04</p>
-      </div>
-    </section>
-
-    <section class="trigger" data-channel="4">
-      <div class="copy">
-        <p>CHANNEL 05</p>
-      </div>
-    </section>
-
-    <section class="trigger" data-channel="5">
-      <div class="copy">
-        <p>CHANNEL 06</p>
-      </div>
-    </section>
+    <section class="trigger" data-channel="0"><div class="spacer"></div></section>
+    <section class="trigger" data-channel="1"><div class="spacer"></div></section>
+    <section class="trigger" data-channel="2"><div class="spacer"></div></section>
+    <section class="trigger" data-channel="3"><div class="spacer"></div></section>
+    <section class="trigger" data-channel="4"><div class="spacer"></div></section>
+    <section class="trigger" data-channel="5"><div class="spacer"></div></section>
   </main>
 
 </body>
