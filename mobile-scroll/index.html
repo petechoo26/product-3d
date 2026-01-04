@@ -8,22 +8,12 @@
 </head>
 <body>
 
-  <!-- 스크롤 공간 (투명) -->
+  <!-- 스크롤 트리거 -->
   <div class="scroll-space"></div>
 
-  <!-- 고정 디바이스 -->
-  <div class="device-wrapper">
-    <div class="device">
-
-      <!-- ✅ 화면은 "마스크(잘라내기)" 안에 넣는다 -->
-      <div class="screen-mask">
-        <img id="screen" class="screen" src="images/P01.png" alt="screen"/>
-      </div>
-
-      <!-- ✅ 프레임(한 번만) -->
-      <img class="frame" src="images/P00.png" alt="frame"/>
-
-    </div>
+  <!-- 고정 이미지 -->
+  <div class="viewer">
+    <img id="phone" src="images/P01.png" alt="phone" />
   </div>
 
   <script src="script.js"></script>
