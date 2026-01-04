@@ -7,36 +7,35 @@ const frames = [
 ];
 
 const img = document.getElementById("phone");
+const space = document.getElementById("scrollSpace");
 
-// preload
+// preload (TV에서도 했던 방식)
 for (const src of frames) {
   const i = new Image();
   i.src = src;
 }
 
-let lastIdx = -1;
+let last = -1;
 
-function update() {
-  const doc = document.documentElement;
+function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
 
-  const max = Math.max(1, doc.scrollHeight - window.innerHeight); // 0 방지
-  const t = window.scrollY / max;
+function update(){
+  // ✅ 핵심: “문서 전체”가 아니라 scroll-space 기준
+  const rect = space.getBoundingClientRect();
 
-  const p = Math.min(0.999999, Math.max(0, t));
-  const idx = Math.floor(p * frames.length);
+  // space의 시작~끝을 0~1로 정규화
+  const total = space.offsetHeight - window.innerHeight;
+  const progressed = clamp(-rect.top, 0, total);
+  const t = total > 0 ? progressed / total : 0;
 
-  if (idx !== lastIdx) {
-    lastIdx = idx;
-    // 캐시/동일 src 문제 방지
-    img.src = `${frames[idx]}?f=${idx}`;
+  const idx = Math.min(frames.length - 1, Math.floor(t * frames.length));
+
+  if (idx !== last) {
+    last = idx;
+    img.src = `${frames[idx]}?f=${idx}`; // 캐시 방지
   }
 }
 
-// 스크롤 이벤트 + 초기 호출
-window.addEventListener("scroll", update, { passive: true });
+window.addEventListener("scroll", update, { passive:true });
 window.addEventListener("resize", update);
 update();
-
-// 디버그 (원하면 지워도 됨)
-console.log("[mobile-scroll] script loaded");
-console.log("SCRIPT LOADED ✅", new Date().toISOString());
