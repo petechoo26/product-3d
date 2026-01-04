@@ -9,9 +9,15 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="stack">
-      <img id="tv" class="tv" src="./images/ch-01.png" alt="TV" />
-      <img id="noise" class="noise" src="./images/noise.png" alt="" aria-hidden="true" />
+    <div class="tvBox">
+      <!-- ✅ 프레임(고정) -->
+      <img class="frame" src="./images/tv-frame.png" alt="TV frame" />
+
+      <!-- ✅ 화면(채널 이미지가 들어가는 곳) -->
+      <div class="screen">
+        <img id="ch" class="ch" src="./images/ch-01.png" alt="channel" />
+        <img id="noise" class="noise" src="./images/noise.png" alt="" aria-hidden="true" />
+      </div>
     </div>
   </div>
 </body>
