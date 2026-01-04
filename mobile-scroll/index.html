@@ -2,31 +2,27 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>UNFEEL Mobile Scroll</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNFEEL Mobile Scroll</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- 스크롤 트리거용 (높이만 담당) -->
+  <!-- 스크롤 공간 (투명) -->
   <div class="scroll-space"></div>
 
-  <!-- 고정된 디바이스 -->
+  <!-- 고정 디바이스 -->
   <div class="device-wrapper">
     <div class="device">
-      <!-- 화면 -->
-      <img
-        id="screen"
-        src="images/P01.png"
-        alt="screen"
-        class="screen"
-      />
-      <!-- 프레임 -->
-      <img
-        src="images/P00.png"
-        alt="frame"
-        class="frame"
-      />
+
+      <!-- ✅ 화면은 "마스크(잘라내기)" 안에 넣는다 -->
+      <div class="screen-mask">
+        <img id="screen" class="screen" src="images/P01.png" alt="screen"/>
+      </div>
+
+      <!-- ✅ 프레임(한 번만) -->
+      <img class="frame" src="images/P00.png" alt="frame"/>
+
     </div>
   </div>
 
