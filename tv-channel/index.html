@@ -2,16 +2,37 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Deoculto TV Channel</title>
+
   <link rel="stylesheet" href="./style.css" />
   <script src="./script.js" defer></script>
 </head>
 <body>
+
+  <!-- 화면에 고정되는 TV -->
   <div class="stage">
-    <img id="tv" class="tv" src="./images/ch-01.png" alt="TV channel" />
+    <div class="stack">
+      <!-- TV 전체 컷 -->
+      <img
+        id="tv"
+        class="tv"
+        src="./images/ch-01.png"
+        alt="TV channel"
+      />
+
+      <!-- 노이즈 오버레이 -->
+      <img
+        id="noise"
+        class="noise"
+        src="./images/noise.png"
+        alt=""
+        aria-hidden="true"
+      />
+    </div>
   </div>
 
+  <!-- 스크롤 영역 (채널 6개) -->
   <main class="scroll">
     <section class="trigger" data-channel="0"></section>
     <section class="trigger" data-channel="1"></section>
@@ -20,6 +41,6 @@
     <section class="trigger" data-channel="4"></section>
     <section class="trigger" data-channel="5"></section>
   </main>
+
 </body>
 </html>
-``
