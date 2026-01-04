@@ -6,8 +6,18 @@ html,body{
   overflow-x:hidden;
 }
 
+.ver{
+  position:fixed;
+  top:10px;
+  left:10px;
+  z-index:9999;
+  font: 12px/1.2 system-ui, sans-serif;
+  opacity:.6;
+  pointer-events:none;
+}
+
 .scroll-space{
-  height:500vh; /* 스크롤로 프레임 전환 */
+  height: 420vh; /* 4장이라 420vh 정도면 충분 */
 }
 
 .viewer{
@@ -20,7 +30,7 @@ html,body{
 }
 
 #phone{
-  width:min(96vw, 720px); /* 크게 */
+  width:min(96vw, 720px); /* 최대한 크게 */
   height:auto;
   display:block;
 }
