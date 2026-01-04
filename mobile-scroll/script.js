@@ -1,21 +1,23 @@
-const images = [
+const frames = [
   "images/P01.png",
   "images/P02.png",
   "images/P03.png",
   "images/P04.png",
 ];
 
-const phone = document.getElementById("phone");
+const img = document.getElementById("phone");
 
-window.addEventListener("scroll", () => {
-  const maxScroll =
-    document.documentElement.scrollHeight - window.innerHeight;
-  const ratio = window.scrollY / maxScroll;
+function updateFrame() {
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const y = Math.max(0, Math.min(window.scrollY, maxScroll));
+  const t = maxScroll ? (y / maxScroll) : 0;
 
-  const index = Math.min(
-    images.length - 1,
-    Math.floor(ratio * images.length)
-  );
+  const idx = Math.min(frames.length - 1, Math.floor(t * frames.length));
+  const nextSrc = frames[idx];
 
-  phone.src = images[index];
-});
+  if (img.getAttribute("src") !== nextSrc) img.src = nextSrc;
+}
+
+window.addEventListener("scroll", updateFrame, { passive: true });
+window.addEventListener("resize", updateFrame);
+updateFrame();
