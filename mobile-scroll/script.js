@@ -39,3 +39,4 @@ update();
 
 // 디버그 (원하면 지워도 됨)
 console.log("[mobile-scroll] script loaded");
+console.log("SCRIPT LOADED ✅", new Date().toISOString());
