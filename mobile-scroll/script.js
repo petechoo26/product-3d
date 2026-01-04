@@ -6,41 +6,20 @@ const frames = [
 ];
 
 const img = document.getElementById("phone");
-const steps = document.querySelectorAll(".step");
+frames.forEach(src => { const i = new Image(); i.src = src; });
 
-let current = 0;
-let switching = false;
+function update(){
+  const doc = document.documentElement;
+  const max = Math.max(0, doc.scrollHeight - window.innerHeight);
+  const t = max > 0 ? (window.scrollY / max) : 0;
 
-// ✅ 미리 로드 (전환 안 되는 느낌/로딩 튕김 방지)
-frames.forEach((src)=>{ const i=new Image(); i.src=src; });
+  const p = Math.min(0.999999, Math.max(0, t));
+  const idx = Math.floor(p * frames.length);
+  const next = frames[idx];
 
-function setFrame(i){
-  i = Number(i);
-  if (switching || i === current) return;
-  if (i < 0 || i >= frames.length) return;
-
-  switching = true;
-  const next = frames[i];
-
-  // 같은 src면 스킵
-  if (img.src.includes(next.replace("./",""))) {
-    switching = false;
-    return;
-  }
-
-  img.style.opacity = "0";
-  setTimeout(() => {
-    img.src = next;
-    img.style.opacity = "1";
-    current = i;
-    switching = false;
-  }, 90);
+  if (!img.src.includes(next.replace("./",""))) img.src = next;
 }
 
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) setFrame(e.target.dataset.i);
-  });
-}, { threshold: 0.6 });
-
-steps.forEach(s => io.observe(s));
+window.addEventListener("scroll", update, { passive:true });
+window.addEventListener("resize", update);
+update();
