@@ -14,16 +14,20 @@ const triggers = document.querySelectorAll(".trigger");
 let current = 0;
 let switching = false;
 
-/* 노이즈 번쩍 */
+/* ✅ 노이즈를 켜고 싶지 않으면 false로 바꾸면 끝 */
+const USE_NOISE = true;
+
 function flashNoise(){
+  if(!USE_NOISE) return;
   if(!noise) return;
-  noise.style.opacity = "0.35";
+
+  // 너무 과하면 거슬리니까 약하게(원하면 0.35로 올려도 됨)
+  noise.style.opacity = "0.20";
   setTimeout(() => {
     noise.style.opacity = "0";
-  }, 120);
+  }, 110);
 }
 
-/* 채널 변경 */
 function setChannel(next){
   next = Number(next);
   if (switching || next === current) return;
@@ -31,7 +35,6 @@ function setChannel(next){
 
   switching = true;
 
-  /* 컷 전환 */
   tv.style.opacity = "0";
   flashNoise();
 
@@ -47,15 +50,12 @@ function setChannel(next){
   img.src = channels[next];
 }
 
-/* 스크롤 → 채널 컷컷 */
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       setChannel(entry.target.dataset.channel);
     }
   });
-}, {
-  threshold: 0.6
-});
+},{ threshold: 0.6 });
 
 triggers.forEach(t => observer.observe(t));
