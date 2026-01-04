@@ -1,25 +1,9 @@
 *{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%; background:transparent; overflow-x:hidden;}
 
-html,body{
-  height:100%;
-  background:transparent;
-  overflow-x:hidden;
-}
-
-/* 반영 체크 */
 .ver{
-  position:fixed;
-  left:12px;
-  top:12px;
-  z-index:9999;
-  font:12px/1.2 system-ui, sans-serif;
-  opacity:.65;
-  pointer-events:none;
-}
-
-/* 스크롤 공간 */
-.scroll-space{
-  height:420vh; /* 4장 전환엔 이 정도면 충분 */
+  position:fixed; left:12px; top:12px; z-index:9999;
+  font:12px/1.2 system-ui, sans-serif; opacity:.65; pointer-events:none;
 }
 
 .viewer{
@@ -29,10 +13,17 @@ html,body{
   align-items:center;
   justify-content:center;
   pointer-events:none;
+  z-index:10;
 }
 
+/* ✅ 최대한 크게 */
 #phone{
-  width:min(96vw, 720px); /* 최대한 크게 */
+  width:min(96vw, 720px);
   height:auto;
   display:block;
+}
+
+/* ✅ 스크롤 공간(각 컷당 100vh) */
+.step{
+  height:100vh;
 }
