@@ -1,78 +1,83 @@
 :root{
-  --tv-width:min(980px, 92vw);
-  --fade-ms:110ms;
+  --bg:#000;
 
-  /* 화면 영역 좌표 (노이즈용) */
+  /* TV가 화면에 최대한 꽉 차게 */
+  --max-h: 92vh;
+  --max-w: 96vw;
+
+  /* 전환 페이드 */
+  --fade-ms: 90ms;
+
+  /* 노이즈(화면 영역만) 좌표: tv-frame 기준 */
   --screen-top: 16.4%;
   --screen-left: 19.2%;
   --screen-width: 61.6%;
   --screen-height: 44.1%;
-  --screen-radius: 24px;
+  --screen-radius: 26px;
 }
 
 *{ box-sizing:border-box; }
 
-/* ✅ 배경 완전 투명 */
 html, body{
+  height:100%;
   margin:0;
   padding:0;
-  width:100%;
-  height:100%;
-  background: transparent;
-  overflow: hidden; /* ✅ iframe 내부 스크롤 제거 */
+  background:var(--bg);
 }
 
-/* stage는 화면에 고정 */
+body{
+  background:var(--bg);
+  overflow-x:hidden;
+}
+
+/* 스크롤 영역: 스크롤을 만들기 위한 공간 */
+.scroll{
+  background:var(--bg);
+}
+
+.trigger{
+  height:100vh;
+}
+
+/* 화면에 고정되는 레이어 */
 .stage{
-  position: fixed;
-  inset: 0;
+  position:fixed;
+  inset:0;
+  background:var(--bg);
 
   display:flex;
-  align-items:flex-start;
+  align-items:center;
   justify-content:center;
 
-  padding-top: 4vh; /* 위 여백 살짝만 */
-  pointer-events:none;
-  background: transparent;
+  pointer-events:none; /* 스크롤/휠 방해 X */
+  z-index:10;
 }
 
-/* TV + 노이즈 래퍼 */
+/* TV+노이즈 스택 */
 .stack{
   position:relative;
-  width:var(--tv-width);
-  max-height:88vh;
+
+  /* ‘프레임에 100%’ 느낌: 화면을 최대한 채움 */
+  width: min(var(--max-w), calc(var(--max-h) * 1.12)); /* 대충 TV 비율 감안 */
+  height: var(--max-h);
 }
 
-/* TV 완성 컷 */
+/* TV 이미지: stack 크기 안에서 최대한 꽉 */
 .tv{
+  position:absolute;
+  inset:0;
   width:100%;
-  height:auto;
-  display:block;
+  height:100%;
   object-fit:contain;
+
   opacity:1;
   transition:opacity var(--fade-ms) ease;
 }
 
-/* 노이즈: 화면 영역만 */
+/* 노이즈: 화면 부분만 */
 .noise{
   position:absolute;
   top: var(--screen-top);
   left: var(--screen-left);
   width: var(--screen-width);
-  height: var(--screen-height);
-
-  border-radius: var(--screen-radius);
-  object-fit: cover;
-
-  pointer-events:none;
-  mix-blend-mode: screen;
-  opacity:0;
-}
-
-img{ display:block; }
-
-/* ❌ 스크롤용 요소 완전 제거 */
-.scroll,
-.trigger{
-  display:none;
-}
+  height: var(--scr
