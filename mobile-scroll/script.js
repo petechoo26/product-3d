@@ -7,56 +7,61 @@ const frames = [
 
 const img = document.getElementById("phone");
 
-// 디버그(현재 idx 표시) - 나중에 지워도 됨
-let badge = document.createElement("div");
+/* 오른쪽 위 디버그: 지금 어떤 src로 바꾸려는지 + 404인지 확인 */
+const badge = document.createElement("div");
 badge.style.cssText = `
-  position:fixed; right:10px; top:10px; z-index:9999;
-  font:12px/1 system-ui; opacity:.7; pointer-events:none;
+  position:fixed; right:12px; top:12px; z-index:9999;
+  font:12px/1.2 system-ui, sans-serif;
+  background:rgba(0,0,0,.55); color:#fff;
+  padding:6px 8px; border-radius:10px;
+  pointer-events:none;
 `;
 document.body.appendChild(badge);
 
-// 미리 로딩 (스크롤 중 로딩으로 안 바뀌는 느낌 방지)
-frames.forEach((src) => {
-  const i = new Image();
-  i.src = src;
-});
-
-function getScrollTop() {
-  return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-}
-
-function getMaxScroll() {
-  const doc = document.documentElement;
-  const body = document.body;
-
+function getMaxScroll(){
+  const d = document.documentElement;
+  const b = document.body;
   const scrollHeight = Math.max(
-    body.scrollHeight, doc.scrollHeight,
-    body.offsetHeight, doc.offsetHeight,
-    body.clientHeight, doc.clientHeight
+    d.scrollHeight, b.scrollHeight,
+    d.offsetHeight, b.offsetHeight
   );
-
   return Math.max(0, scrollHeight - window.innerHeight);
 }
 
-function update() {
-  const y = getScrollTop();
+function setSrc(next){
+  return new Promise((resolve, reject) => {
+    const test = new Image();
+    test.onload = () => resolve(next);
+    test.onerror = () => reject(next);
+    test.src = next;
+  });
+}
+
+let lastIdx = -1;
+
+async function update(){
   const max = getMaxScroll();
-
-  // max가 0이면 스크롤이 없다는 뜻 → 첫 프레임 유지
-  const t = max > 0 ? y / max : 0;
-
-  // 마지막에서 튀는 것 방지
+  const t = max > 0 ? (window.scrollY / max) : 0;
   const p = Math.min(0.999999, Math.max(0, t));
   const idx = Math.floor(p * frames.length);
 
-  badge.textContent = `idx: ${idx} / y:${Math.round(y)} / max:${Math.round(max)}`;
+  if (idx === lastIdx) {
+    badge.textContent = `idx:${idx} y:${Math.round(window.scrollY)} max:${Math.round(max)}`;
+    return;
+  }
+  lastIdx = idx;
 
   const next = frames[idx];
-  if (!img.src.endsWith(next.replace("./", ""))) {
+  badge.textContent = `idx:${idx} → ${next}`;
+
+  try {
+    await setSrc(next);      // ✅ 파일이 실제로 존재하는지 먼저 체크
     img.src = next;
+  } catch(e) {
+    badge.textContent = `❌ 이미지 로딩 실패: ${next}\n(파일명 대/소문자 확인!)`;
   }
 }
 
-window.addEventListener("scroll", update, { passive: true });
+window.addEventListener("scroll", update, { passive:true });
 window.addEventListener("resize", update);
 update();
