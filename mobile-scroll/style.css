@@ -1,26 +1,26 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*{margin:0;padding:0;box-sizing:border-box;}
 
-html, body {
-  height: 100%;
-  background: transparent;   /* 아임웹 배경 그대로 */
-  overflow-x: hidden;
+html,body{
+  height:100%;
+  background:transparent;
+  overflow-x:hidden;
 }
 
-.scroll-space {
-  height: 500vh;            /* 스크롤 전환용 */
+.scroll-space{
+  height:500vh; /* 스크롤로 프레임 전환 */
 }
 
-.viewer {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
+.viewer{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
 }
 
-#phone {
-  width: min(96vw, 620px);  /* 최대한 크게 */
-  height: auto;
-  display: block;
+#phone{
+  width:min(96vw, 720px); /* 크게 */
+  height:auto;
+  display:block;
 }
