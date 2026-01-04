@@ -4,21 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UNFEEL Mobile Scroll</title>
-  <link rel="stylesheet" href="./style.css?v=99">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <!-- 반영 확인용 -->
+  <div class="ver">mobile v100</div>
 
-  <!-- 반영 체크용 (이게 안 보이면 배포가 아직 옛날임) -->
-  <div class="ver">mobile v99</div>
-
-  <!-- 스크롤 길이 -->
-  <div class="scroll-space"></div>
-
-  <!-- ✅ 이미지 1장만 (겹침 절대 없음) -->
-  <div class="viewer">
-    <img id="phone" src="./images/P01.png" alt="phone" />
+  <!-- 고정 뷰어 (이미지 1장만) -->
+  <div class="viewer" aria-hidden="true">
+    <img id="phone" src="./images/P01.png" alt="phone">
   </div>
 
-  <script src="./script.js?v=99"></script>
+  <!-- 스크롤 트리거 (P01~P04 = 4컷) -->
+  <main class="scroll">
+    <section class="step" data-i="0"></section>
+    <section class="step" data-i="1"></section>
+    <section class="step" data-i="2"></section>
+    <section class="step" data-i="3"></section>
+  </main>
+
+  <script src="./script.js"></script>
 </body>
 </html>
