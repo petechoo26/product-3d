@@ -1,44 +1,31 @@
 const channels = [
-  "./images/ch-01.jpg",
-  "./images/ch-02.jpg",
-  "./images/ch-03.jpg",
-  "./images/ch-04.jpg",
-  "./images/ch-05.jpg",
-  "./images/ch-06.jpg",
+  "./images/ch-01.png",
+  "./images/ch-02.png",
+  "./images/ch-03.png",
+  "./images/ch-04.png",
+  "./images/ch-05.png",
+  "./images/ch-06.png",
 ];
 
-const screen = document.getElementById("screen");
-const noise = document.querySelector(".noise");
+const tv = document.getElementById("tv");
 const triggers = document.querySelectorAll(".trigger");
 
 let current = 0;
 let switching = false;
 
-function flashNoise(){
-  if(!noise) return;
-  noise.style.opacity = "0.35";
-  setTimeout(()=> noise.style.opacity = "0", 120);
-}
-
 function setChannel(next){
   next = Number(next);
-  if (Number.isNaN(next)) return;
-  if (next === current) return;
+  if (switching || next === current) return;
   if (next < 0 || next >= channels.length) return;
-  if (switching) return;
 
   switching = true;
+  tv.style.opacity = "0";
 
-  screen.style.opacity = "0";
-  flashNoise();
-
-  // 이미지 소스 교체
   const img = new Image();
   img.onload = () => {
-    screen.src = channels[next];
-    // 아주 짧게 딜레이 후 페이드 인
+    tv.src = channels[next];
     requestAnimationFrame(() => {
-      screen.style.opacity = "1";
+      tv.style.opacity = "1";
       current = next;
       switching = false;
     });
@@ -46,16 +33,13 @@ function setChannel(next){
   img.src = channels[next];
 }
 
-/* 스크롤 섹션이 화면 중앙 근처 오면 채널 변경 */
+/* 스크롤 → 채널 변경 */
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       setChannel(entry.target.dataset.channel);
     }
   });
-}, {
-  root: null,
-  threshold: 0.6
-});
+},{ threshold: 0.6 });
 
 triggers.forEach(t => observer.observe(t));
